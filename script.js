@@ -4,9 +4,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to create puzzle pieces with random arrangement
     function createRandomArrangement() {
-        const numbers = [...Array(8).keys()].map(i => i + 1);
-        numbers.push(""); // Add an empty space
-        return numbers.sort(() => Math.random() - 0.5); // Shuffle the numbers
+        let numbers;
+        do {
+            numbers = [...Array(8).keys()].map(i => i + 1);
+            numbers.push(""); // Add an empty space
+            numbers.sort(() => Math.random() - 0.5); // Shuffle the numbers
+        } while (!isSolvable(numbers)); // Repeat until a solvable arrangement is found
+        return numbers;
+    }
+
+    // Function to check if the puzzle arrangement is solvable
+    function isSolvable(arrangement) {
+        const inversionCount = getInversionCount(arrangement.filter(n => n !== ""));
+        return inversionCount % 2 === 0;
+    }
+
+    // Function to count inversions
+    function getInversionCount(arr) {
+        let count = 0;
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) count++;
+            }
+        }
+        return count;
     }
 
     let currentArrangement = createRandomArrangement();
