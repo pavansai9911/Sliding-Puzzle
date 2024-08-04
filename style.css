@@ -30,7 +30,7 @@ body {
     font-size: 24px;
     font-weight: bold; /* Make the integers more bold */
     background-color: #ddd;
-    background-image: url('bg2.png');
+    background-image: url('bg1.png');
     background-size: cover;
     cursor: pointer;
     border: 2px solid black; /* Add black border to puzzle pieces */
